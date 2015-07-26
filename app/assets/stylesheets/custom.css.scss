@@ -1,0 +1,92 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+// compass sprites
+@import "compass/utilities/sprites/base";
+$icons: sprite-map("icons/*.png", $icons: smart);
+
+// carousel
+.custom-carousel-wrapper {
+	position: relative;
+	width: 1440px;
+	margin: 100px auto 0;
+}
+	.custom-carousel {
+		overflow: hidden;
+		position: relative;
+		height: 288px;
+
+		.row {
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+		.custom-carousel-inner {
+			position: absolute;
+			left: 0;
+			top: 0;
+			bottom: 0;
+		}
+		.custom-carousel-item {
+			display: inline-block;
+			float: left;
+			margin: 10px;
+
+			img {
+				width: 220px;
+				height: 124px;
+			}
+		}
+		.custom-carousel-item.big {
+			img {
+				width: 460px;
+				height: 268px;
+			}
+		}
+
+	.custom-carousel-btn {
+		display: inline-block;
+		width: 22px;
+		height: 66px;
+		position: absolute;
+		top: 50%;
+		margin-top: -33px;
+	}
+	.btn-left {
+		left: -30px;
+		/* background-image: asset-data-url("icons/arrow-left.png"); */
+		background: sprite($icons, arrow-left) no-repeat;
+	}
+	.btn-right {
+		right: -30px;
+		background: sprite($icons, arrow-right) no-repeat;
+	}
+
+@media (max-width: 1519px) {
+	.custom-carousel-wrapper {
+		width: 1200px;
+	}
+}
+@media (max-width: 1279px) {
+	.custom-carousel-wrapper {
+		width: 960px;
+	}
+}
+@media (max-width: 991px) {
+	.custom-carousel-wrapper {
+		width: 720px;
+	}
+}
+@media (max-width: 767px) {
+	.custom-carousel-wrapper {
+		width: 480px;
+	}
+}
+@media (max-width: 639px) {
+	.custom-carousel-wrapper {
+		width: 240px;
+	}
+	.custom-carousel-item.big {
+		display: none;
+	}
+}
