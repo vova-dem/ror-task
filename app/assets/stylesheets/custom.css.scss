@@ -177,4 +177,16 @@ $icons: sprite-map("icons/*.png", $icons: smart);
 		}
 }
 
+@media (max-width: 639px) {
+	.new-carousel {
+		.custom-carousel-item.big {
+			display: block;
+
+			img {
+				width: 220px;
+			}
+		}
+	}
+}
+
 		
