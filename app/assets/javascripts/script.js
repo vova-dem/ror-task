@@ -26,7 +26,14 @@ $(document).ready(function(){
       bigItemsWidth += $(bigItems[i]).outerWidth(true);
     }
 
-    var width = itemsWidth / 2 + bigItemsWidth;
+    // width for different carousel
+
+    var width = 0;
+    if ( $(this).hasClass('new-carousel') ) {
+      width = itemsWidth + bigItemsWidth;
+    } else {
+      width = itemsWidth / 2 + bigItemsWidth;
+    }
     $(carouselInner).css('width', width);
     console.log(width);
 
@@ -39,12 +46,19 @@ $(document).ready(function(){
     
     // right carousel button click handler
 
+    var isAnimated = false; 
+
     $(rightBtn).on('click', function(event){
       event.preventDefault();
+      if ( isAnimated ) {
+        return false;
+      }
       if ( ( parseInt($(carouselInner ).css('left')) * -1 + containerWidth ) < width ) {
+        isAnimated = true;
         $( carouselInner ).animate({
           left: "-=" + containerWidth
-        }, 600, function() {
+        }, 600, function() { //callback
+          isAnimated = false;
           if ( ( parseInt($(carouselInner ).css('left')) + containerWidth) <= 0 ) {
             $(leftBtn).css('display', 'inline-block');
             $( leftBtn ).animate({
@@ -59,10 +73,15 @@ $(document).ready(function(){
 
     $(leftBtn).on('click', function(event){
       event.preventDefault();
+      if ( isAnimated ) {
+        return false;
+      }
       if ( ( parseInt($(carouselInner ).css('left')) + containerWidth ) <= 0 ) {
+        isAnimated = true;
         $( carouselInner ).animate({
           left: "+=" + containerWidth
-        }, 600, function() {
+        }, 600, function() { //callback
+          isAnimated = false;
           if ( ( parseInt($(carouselInner ).css('left')) + containerWidth) > 0 ) {
             $( leftBtn ).animate({
               opacity: 0

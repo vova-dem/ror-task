@@ -138,3 +138,43 @@ $icons: sprite-map("icons/*.png", $icons: smart);
 		display: none;
 	}
 }
+
+
+/* second carousel */
+.new-carousel {
+	.custom-carousel-item {
+
+		&:hover, &:focus {
+			opacity: 1;
+
+			.custom-carousel-item-caption {
+				opacity: 1;
+			}
+			.custom-carousel-item-caption-hover {
+				opacity: 0;
+			}
+		}
+	}
+		.custom-carousel-item-part {
+			position: relative;
+			@include transition-property(opacity);
+		  	@include transition-duration(0.4s);
+
+			&:hover, &:focus {
+				opacity: 0.7;
+
+				.custom-carousel-item-caption {
+					opacity: 0;
+				}
+				.custom-carousel-item-caption-hover {
+					opacity: 1;
+				}
+			}
+
+		}
+		.custom-carousel-item-part + .custom-carousel-item-part{
+			margin-top: 20px;
+		}
+}
+
+		
