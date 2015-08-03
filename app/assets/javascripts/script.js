@@ -3,10 +3,13 @@ $(document).ready(function(){
     var carouselInner = $(this).find('.custom-carousel-inner');
     var leftBtn = $(this).find('.custom-carousel-btn.btn-left');
     var rightBtn = $(this).find('.custom-carousel-btn.btn-right');
-    var containerWidth = $(this).width();
+    var containerWidth = 0;
 
     var items = $(this).find('.custom-carousel-item');
     var bigItems = $(this).find('.custom-carousel-item.big');
+
+    var itemWidth = $(items[1]).width();
+    console.log(itemWidth + ' asdsa');
 
     // calculate width of carosel-inner block
 
@@ -50,6 +53,7 @@ $(document).ready(function(){
 
     $(rightBtn).on('click', function(event){
       event.preventDefault();
+      containerWidth = $(this).closest('.custom-carousel-wrapper').width();
       if ( isAnimated ) {
         return false;
       }
@@ -72,6 +76,7 @@ $(document).ready(function(){
     // left carousel button click handler
 
     $(leftBtn).on('click', function(event){
+      containerWidth = $(this).closest('.custom-carousel-wrapper').width();
       event.preventDefault();
       if ( isAnimated ) {
         return false;
@@ -82,7 +87,7 @@ $(document).ready(function(){
           left: "+=" + containerWidth
         }, 600, function() { //callback
           isAnimated = false;
-          if ( ( parseInt($(carouselInner ).css('left')) + containerWidth) > 0 ) {
+          if ( ( parseInt($(carouselInner ).css('left')) + containerWidth) > ( containerWidth - 1 ) ) {
             $( leftBtn ).animate({
               opacity: 0
             }, 400, function() {
@@ -90,7 +95,19 @@ $(document).ready(function(){
             });
           }
         });
-      } 
+      } else if ( ( parseInt($(carouselInner ).css('left')) * -1) < containerWidth && parseInt($(carouselInner ).css('left')) != 0 ) {
+        isAnimated = true;
+        $( carouselInner ).animate({
+          left: 0
+        }, 600, function() { //callback
+          isAnimated = false;
+          $( leftBtn ).animate({
+             opacity: 0
+          }, 400, function() {
+            $(leftBtn).css('display', 'none');
+          });
+        });
+      }
     });
 
   });
