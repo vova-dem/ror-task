@@ -81,7 +81,19 @@ $(document).ready(function(){
       if ( isAnimated ) {
         return false;
       }
-      if ( ( parseInt($(carouselInner ).css('left')) + containerWidth ) <= 0 ) {
+      if ( ( parseInt($(carouselInner ).css('left')) + containerWidth * 2 ) < containerWidth && ( parseInt($(carouselInner ).css('left')) + containerWidth * 2) > 0 ) {
+        isAnimated = true;
+        $( carouselInner ).animate({
+          left: 0
+        }, 600, function() { //callback
+          isAnimated = false;
+          $( leftBtn ).animate({
+             opacity: 0
+          }, 400, function() {
+            $(leftBtn).css('display', 'none');
+          });
+        });
+      } else if ( ( parseInt($(carouselInner ).css('left')) + containerWidth ) <= 0 ) {
         isAnimated = true;
         $( carouselInner ).animate({
           left: "+=" + containerWidth
